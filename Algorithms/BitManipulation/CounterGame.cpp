@@ -53,7 +53,6 @@ int main()
 
     (result == true) ? cout << "Louise" << endl : cout << "Richard" << endl;
         
-    }
-
-    return 0;
+  }
+  return 0;
 }
