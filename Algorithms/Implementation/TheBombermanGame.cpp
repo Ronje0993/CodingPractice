@@ -1,10 +1,3 @@
-//----------------------------------------------------------------------------------
-// Question Link - https://www.hackerrank.com/challenges/bomber-man/problem
-// This solution is not perfect and only solves 14/25 testcases
-//----------------------------------------------------------------------------------
-
-
-
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -21,8 +14,8 @@ void FillPlaces(vector<string>& grid){
 }
 
 void FindBomb(vector<string>& grid){
-    for (int i = 0; i < grid.size(); i++){
-        for (int j = 0; j < grid[i].length(); j++){
+    for (unsigned int i = 0; i < grid.size(); i++){
+        for (unsigned int j = 0; j < grid[i].length(); j++){
             if (grid[i][j] == 'O'){
                 Bombspots.push(make_pair(i,j));
             }
@@ -32,8 +25,8 @@ void FindBomb(vector<string>& grid){
 
 void BombNow(vector<string>& grid){
     while(!Bombspots.empty()){
-        int r = Bombspots.front().first;
-        int c = Bombspots.front().second;
+        unsigned int r = Bombspots.front().first;
+        unsigned int c = Bombspots.front().second;
         grid[r][c] = '.';
         Next_Bombspots.push(make_pair(r,c));
 
@@ -56,15 +49,15 @@ void BombNow(vector<string>& grid){
            grid[r][c-1] = '.';
            Next_Bombspots.push(make_pair(r,c-1));
         }
-        
+
         Bombspots.pop();
     }
 }
 
 // Complete the bomberMan function below.
 vector<string> bomberMan(int n, vector<string>& grid) {
-    for(int i = 0; i < grid.size(); i++){
-        for (int j = 0; j< grid[i].length(); j++){
+    for(unsigned int i = 0; i < grid.size(); i++){
+        for (unsigned int j = 0; j< grid[i].length(); j++){
             if (grid[i][j] == 'O'){
                 Bombspots.push(make_pair(i,j));
             }else{
@@ -72,7 +65,7 @@ vector<string> bomberMan(int n, vector<string>& grid) {
             }
         }
     }
-    
+
     for (int i = 1; i < n; i++){
         if (i%2==0){
             BombNow(grid);
@@ -80,6 +73,7 @@ vector<string> bomberMan(int n, vector<string>& grid) {
         } else {
             FillPlaces(grid);
         }
+
     }
 
     return(grid);
@@ -106,7 +100,12 @@ int main()
 
         grid[i] = grid_item;
     }
-
+    if (n > 4){
+        n = 6- (n % 4);   // Calculate the minimum times the loop should run
+        if(n % 2 == 0 ){
+            n = 2;
+        }
+    }
     vector<string> result = bomberMan(n, grid);
 
     for (int i = 0; i < result.size(); i++) {
@@ -116,8 +115,6 @@ int main()
             cout << "\n";
         }
     }
-
-    cout << "\n";
 
     return 0;
 }
