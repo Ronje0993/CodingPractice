@@ -39,7 +39,7 @@ vector<vector<int>> swapNodes(vector<vector<int>> indexes, vector<int> queries) 
     vector<vector<int>> result;
     queue<Node *> nodeQ;
 
-    // Build a tree
+    // Build a tree { not considering the timecomplexity calculations here }
     Node *root = new Node(1,1);
     nodeQ.push(root);
     unsigned int thisLayerCount = 1, nextLayerCount = 0, currentLayerid = 2;
